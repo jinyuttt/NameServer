@@ -18,7 +18,7 @@ import java.util.LinkedList;
 *     
 * 项目名称：ProcessMessage    
 * 类名称：ProcessMessage    
-* 类描述：    
+* 类描述： 通讯类
 * 创建人：jinyu    
 * 创建时间：2017年1月25日 下午7:17:56    
 * 修改人：jinyu    
