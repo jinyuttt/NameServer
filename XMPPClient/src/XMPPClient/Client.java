@@ -1,19 +1,11 @@
 package XMPPClient;
 
-
-
-
 import org.jivesoftware.smack.AbstractXMPPConnection;
-
-
-
 import org.jivesoftware.smack.chat.Chat;
 import org.jivesoftware.smack.chat.ChatManager;
 import org.jivesoftware.smack.chat.ChatMessageListener;
 import org.jivesoftware.smack.packet.Message;
-
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
-
 import org.jivesoftware.smackx.workgroup.WorkgroupInvitation;
 
 
