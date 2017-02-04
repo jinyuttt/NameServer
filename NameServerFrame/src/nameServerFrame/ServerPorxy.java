@@ -1,10 +1,6 @@
 package nameServerFrame;
 
-
-
 import ProxyExchange.ClientToServer;
-
-
 import nameServerFun.RecDataCall;
 import nameServerInterface.IServer;
 
