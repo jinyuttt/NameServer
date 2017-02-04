@@ -2,7 +2,6 @@ package nameServerClient;
 
 
 import AppConfig.ClientGlobalConfig;
-
 import RequestServerInfo.ServerManagerType;
 import nameServerContainer.ProxyPlugin;
 
