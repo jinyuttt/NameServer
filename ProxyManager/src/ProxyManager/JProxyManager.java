@@ -14,20 +14,15 @@ package ProxyManager;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import AppConfig.ManagerGlobalConfig;
 import JJYComponent.JJYTableCell;
 import ProcessMessage.InnerMessage;
 import SeverManager.ServerManager;
-
-
 import javax.swing.JScrollPane;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
