@@ -49,7 +49,7 @@ public String master="0";
 public String Is_Using="1";
 
 /**
- * 
+ * 主从服务
  */
 public String slave="0";
 }
