@@ -1,0 +1,139 @@
+  
+/**    
+* 文件名：ProxyManager.java    
+*    
+* 版本信息：    
+* 日期：2017年1月22日    
+* Copyright 足下 Corporation 2017     
+* 版权所有    
+*    
+*/  
+
+package ProxyManager;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.FlowLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTable;
+import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
+
+/**    
+*     
+* 项目名称：ProxyManager    
+* 类名称：ProxyManager    
+* 类描述：    
+* 创建人：jinyu    
+* 创建时间：2017年1月22日 下午10:21:56    
+* 修改人：jinyu    
+* 修改时间：2017年1月22日 下午10:21:56    
+* 修改备注：    
+* @version     
+*     
+*/
+public class ProxyManager extends JFrame {
+
+	private JPanel contentPane;
+	private JTable tb_server;
+	private JTable tb_log;
+	private JScrollPane scrollPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ProxyManager frame = new ProxyManager();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ProxyManager() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 528, 456);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(22, Short.MAX_VALUE))
+		);
+		//
+		String[] headers = { "表头一", "表头二", "表头三" };
+		Object[][] cellData = null;
+		DefaultTableModel model = new DefaultTableModel(cellData, headers);
+		
+		JPanel panel_log = new JPanel();
+		tabbedPane.addTab("日志信息", null, panel_log, null);
+		
+		scrollPane = new JScrollPane();
+		panel_log.add(scrollPane);
+		
+		tb_log = new JTable(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"\u8868\u5934\u4E00", "\u8868\u5934\u4E8C", "\u8868\u5934\u4E09"
+			}
+		));
+		panel_log.add(tb_log);
+		
+		JPanel panel_Server = new JPanel();
+		tabbedPane.addTab("当前服务信息", null, panel_Server, null);
+		tb_server = new JTable(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"\u8868\u5934\u4E00", "\u8868\u5934\u4E8C", "\u8868\u5934\u4E09"
+			}
+		));
+		tb_server.setRowSelectionAllowed(false);
+		tb_server.setFillsViewportHeight(true);
+		tb_server.setEnabled(false);
+		panel_Server.add(tb_server);
+		contentPane.setLayout(gl_contentPane);
+	}
+}

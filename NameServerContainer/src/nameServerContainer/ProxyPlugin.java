@@ -1,0 +1,97 @@
+package nameServerContainer;
+
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import PublicModel.ServerBinds;
+import RequestServerInfo.ReqInfoSend;
+
+import ServerRecInfo.ServerInfo;
+import hashingAlgorithm.cirALL;
+/*
+ * 
+*     
+* 项目名称：NameServerContainer    
+* 类名称：ProxyPlugin    
+* 类描述：    单例
+* 获取服务信息；开启接收服务信息，发送获取所有服务的请求
+* 创建人：jinyu    
+* 创建时间：2017年1月21日 上午12:33:08    
+* 修改人：jinyu    
+* 修改时间：2017年1月21日 上午12:33:08    
+* 修改备注：    
+* @version     
+*
+ */
+public class ProxyPlugin  {
+
+	ServerInfo serverAdd=new ServerInfo(); 
+	private final static ProxyPlugin sigle=new ProxyPlugin();
+	public static ProxyPlugin GetInstance()
+	{
+		return  sigle;
+	}
+   private ProxyPlugin()
+   {
+	   
+   }
+	
+ /**
+  * 获取服务信息
+ * @param name 服务名称
+ * @return 服务组件信息
+ */
+public ServerBinds GetCur(String name) {
+		
+	ServerInfoSave  temp=new ServerInfoSave();
+    ArrayList<ServerBinds> listObj=temp.GetCur(name);
+	if(listObj==null||listObj.size()==0)
+	{
+		return null;
+	}
+	else if(listObj.size()==1)
+	{
+		return listObj.get(0);
+	}
+	else
+	{
+		//启用负载均衡
+		cirALL cir=new cirALL();
+		Object[] objarry=listObj.toArray();
+		CopyOnWriteArrayList<Object> cal = new CopyOnWriteArrayList<Object>(objarry);
+	    Object obj=	cir.GetCurNodeInfo(cal);
+	    ServerBinds info=(ServerBinds)obj; 
+	    return info;
+	}
+		
+	
+	}
+	
+	/**
+	 * 初始化接收服务信息
+	 * 
+	 */
+	public void InitRecSeverInfo()
+	{
+		serverAdd.AddServer();
+	}
+	
+	
+	/**
+	 * 服务端把新添加的服务发送出去
+	 * @param info
+	 */
+	public void NoticeServerInfo(ServerBinds info)
+	{
+		serverAdd.SendInfo(info);
+	}
+	
+/**
+ * 客户端启动时发送请求
+ */
+public void ReqServerInfo()
+{
+	ReqInfoSend send=new ReqInfoSend();
+ 	send.send();
+}
+}

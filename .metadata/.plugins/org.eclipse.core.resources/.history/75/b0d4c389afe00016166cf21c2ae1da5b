@@ -1,0 +1,66 @@
+  
+/**    
+* 文件名：ProxyManager.java    
+*    
+* 版本信息：    
+* 日期：2017年1月22日    
+* Copyright 足下 Corporation 2017     
+* 版权所有    
+*    
+*/  
+
+package ProxyManager;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+/**    
+*     
+* 项目名称：ProxyManager    
+* 类名称：ProxyManager    
+* 类描述：    
+* 创建人：jinyu    
+* 创建时间：2017年1月22日 下午10:21:56    
+* 修改人：jinyu    
+* 修改时间：2017年1月22日 下午10:21:56    
+* 修改备注：    
+* @version     
+*     
+*/
+public class ProxyManager extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ProxyManager frame = new ProxyManager();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ProxyManager() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+	}
+
+}

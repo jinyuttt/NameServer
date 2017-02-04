@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;IProtocols&apos;&#x0D;&#x0A;- Original project: &apos;IProtocols&apos;&#x0D;&#x0A;- Original element: &apos;DDS_Transfer.TransferProtocolObj.java&apos;" description="Delete element" element1="/src&lt;DDS_Transfer{TransferProtocolObj.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1484151124012" subPackages="false" version="1.0"/>
+</session>
