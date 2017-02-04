@@ -10,8 +10,6 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
-
-
 import DDS_Transfer.IDDS_Protocol;
 import DDS_Transfer.IRecMsg;
 import DDS_Transfer.ProtocolType;
