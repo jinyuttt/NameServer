@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
+
+
 import DDS_Transfer.IDDS_Protocol;
 import DDS_Transfer.IRecMsg;
 import DDS_Transfer.ProtocolType;
@@ -26,6 +28,8 @@ public class TCPProtocols implements IDDS_Protocol{
 	ServerSocket serverSocket = null;
 	Socket clientSocket=null;
 	boolean isRun=true;
+	int socketBuffersize=32;
+	int recBuffersize=1024;
 	public void SetBindAddress(String addr)
 	{
 		//curBindAddress=addr;
@@ -100,6 +104,7 @@ private void SocketRec(String Address)
 					
 					   try {
 						listen = new ServerSocket();
+						listen.setReceiveBufferSize(socketBuffersize*1024);
 						listen.setReuseAddress(true);
 					    listen.bind(new InetSocketAddress(port));
 						  System.out.println("绑定端口:"+port);
@@ -116,6 +121,7 @@ private void SocketRec(String Address)
 			      
 					try {
 						 listen = new ServerSocket();
+						 listen.setReceiveBufferSize(socketBuffersize*1024);
 						 listen.setReuseAddress(true);
 						 SocketAddress endpoint = new InetSocketAddress(serverIP, port); 
 						 System.out.println("绑定端口IP:"+port+";"+serverIP);
@@ -129,7 +135,7 @@ private void SocketRec(String Address)
 				serverSocket=listen;
 				while(isRun)
 				{
-					 byte[]datas=new byte[1024];  
+					 byte[]datas=new byte[recBuffersize];  
 		             Socket server = null;
 				
 					try {
@@ -453,6 +459,28 @@ public void ServerSocketSendData(byte[] data) {
 		}
 	     
 	}
+	
+}
+/*
+* Title: SetSocketBufferSize
+*Description: 
+* @param size 
+ 
+*/
+@Override
+public void SetSocketBufferSize(int size) {
+	
+	socketBuffersize=size;
+}
+/*
+* Title: SetRecBufferSize
+*Description: 
+* @param siez 
+ 
+*/
+@Override
+public void SetRecBufferSize(int size) {
+	recBuffersize=size;
 	
 }
 

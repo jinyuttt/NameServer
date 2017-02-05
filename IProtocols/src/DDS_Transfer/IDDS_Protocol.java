@@ -101,4 +101,19 @@ public void SetBindAddress(String addr);
 //返回使用的地址
 public  String GetLocalAddress();
 
+/*
+ * 设置Socket缓存大小
+ */
+public void SetSocketBufferSize(int size);
+
+/**
+ * 
+* @Name: SetRecBufferSize 
+* @Description: 设置接收区域大小
+* @param siez  参数说明 
+* @return void    返回类型 
+* @throws
+ */
+public void SetRecBufferSize(int size);
+
 }

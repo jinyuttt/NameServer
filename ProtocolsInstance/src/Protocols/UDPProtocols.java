@@ -6,7 +6,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.SocketAddress;
 
 
@@ -25,6 +26,10 @@ public class UDPProtocols implements IDDS_Protocol{
 		private	String curBindAddress="";
 		private String curLocalAddress="";
 		IRecMsg curRec=null;
+		int socketBuffersize=32;
+		int recBuffersize=1024;
+		ServerSocket serverSocket = null;
+		Socket clientSocket=null;
 private void SendMsg(String ip,int port,byte[]data) throws IOException, Exception
 		{
 	System.out.println("·¢ËÍIP:"+ip);
@@ -156,18 +161,7 @@ private void CallData(String src,int port,byte[]data)
 		String addr=src+":"+port;
 		curRec.RecData(addr, data);
 	}
-//	DDSData curdata=AnalyzeData.AsyData(data);
-//	//
-//	List<IRecMsg> waitRec=hmap.get(curdata.topicName);
-//	if(waitRec!=null)
-//	{
-//		int num=waitRec.size();
-//	for(int i=0;i<num;i++)
-//	{
-//		IRecMsg tmp=waitRec.get(i);
-//		tmp.RecData(src, curdata.topicName, curdata.data);
-//	}
-//	}
+
 }
 
 
@@ -195,7 +189,16 @@ private void CallData(String src,int port,byte[]data)
 	
 	@Override
 	public void Close() {
-		// TODO Auto-generated method stub
+		if(serverSocket!=null)
+		{
+		     try {
+		    	// isRun=false;
+				 serverSocket.close();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	  
@@ -311,6 +314,29 @@ private void CallData(String src,int port,byte[]data)
 	@Override
 	public void ServerSocketSendData(byte[] data) {
 		// TODO Auto-generated method stub
+		
+	}
+	/*
+	* Title: SetSocketBufferSize
+	*Description: 
+	* @param size 
+	 
+	*/
+	@Override
+	public void SetSocketBufferSize(int size) {
+		 socketBuffersize=size;
+		
+		
+	}
+	/*
+	* Title: SetRecBufferSize
+	*Description: 
+	* @param siez 
+	 
+	*/
+	@Override
+	public void SetRecBufferSize(int size) {
+		 recBuffersize=size;
 		
 	}
 
