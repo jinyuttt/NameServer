@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Extract method &apos;private void ConvertMessage(String name, Object objStruct, String message)&apos; from &apos;ProxyManager.ListenMessage.notify()&apos; to &apos;ProxyManager.ListenMessage&apos;&#x0D;&#x0A;- Original project: &apos;ProxyManager&apos;&#x0D;&#x0A;- Method name: &apos;ConvertMessage&apos;&#x0D;&#x0A;- Destination type: &apos;ProxyManager.ListenMessage&apos;&#x0D;&#x0A;- Declared visibility: &apos;private&apos;&#x0D;&#x0A;- Generate method comment" comments="true" description="Extract method &apos;ConvertMessage&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;ProxyManager{ListenMessage.java" name="ConvertMessage" replace="false" selection="780 717" stamp="1486010891057" version="1.0" visibility="2"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy package &apos;AppConfig&apos; to &apos;ProxyManager/src&apos;&#x0D;&#x0A;- Original project: &apos;NameServerClient&apos;&#x0D;&#x0A;- Destination element: &apos;ProxyManager/src&apos;&#x0D;&#x0A;- Original element: &apos;NameServerClient/src/AppConfig&apos;" description="Copy package" destination="=ProxyManager/src" element1="/src&lt;AppConfig" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1485778129859" version="1.0"/>
-</session>

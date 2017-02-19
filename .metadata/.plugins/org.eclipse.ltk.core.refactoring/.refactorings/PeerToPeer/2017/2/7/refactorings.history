@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy 2 elements to &apos;NameServerContainer/src/nameServerContainer&apos;&#x0D;&#x0A;- Original project: &apos;PeerToPeer&apos;&#x0D;&#x0A;- Destination element: &apos;NameServerContainer/src/nameServerContainer&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     UDPPeerToPeer.ServerXml.java&#x0D;&#x0A;     UDPPeerToPeer.ServerXmlInfo.java" description="Copy compilation units" destination="=NameServerContainer/src&lt;nameServerContainer" element1="/src&lt;UDPPeerToPeer{ServerXml.java" element2="/src&lt;UDPPeerToPeer{ServerXmlInfo.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1487267803764" units="2" version="1.0"/>
-</session>
