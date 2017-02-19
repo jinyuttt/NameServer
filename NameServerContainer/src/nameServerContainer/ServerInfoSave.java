@@ -131,7 +131,7 @@ private void ProcessMaster(ServerBinds server)
 		
 	}
 	//处理主服务
-	if(server.Is_Using.equals("1"))
+	if(server.is_Using.equals("1"))
 	{
 		ServerBinds tmp=ServersContains.masterServers.getOrDefault(server.name, null);
 		if(tmp==null)
@@ -141,17 +141,17 @@ private void ProcessMaster(ServerBinds server)
 		}
 		else
 		{
-			if(tmp.Is_Using.equals("1"))
+			if(tmp.is_Using.equals("1"))
 			{
 				//配置错误时处理错误
 				if(server.sid.compareTo(tmp.sid)>0)
 				{
 					ServersContains.masterServers.replace(server.name, server);
-					tmp.Is_Using="0";//以前的服务修改
+					tmp.is_Using="0";//以前的服务修改
 				}
 				else
 				{
-					server.Is_Using="0";//修改，基于引用全部修改
+					server.is_Using="0";//修改，基于引用全部修改
 				}
 			}
 			else

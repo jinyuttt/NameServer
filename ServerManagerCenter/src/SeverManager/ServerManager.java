@@ -33,9 +33,18 @@ public class ServerManager {
 	 IDDS_Protocol curObj =null;
 	 IRecMsg recService =null;
 	 IRecMsg recClientRequest =null;
+	 IRecMsg recHeartBeat=null;
+	 IRecMsg recFireInfo=null;//接收服务端穿墙成功
+	 IRecMsg recTCPNat=null;
+	 IRecMsg recUDPNat=null;//接收客户端穿墙请求,与TCP不同
+	 IRecMsg recTCPBeat=null;//为了保持TCP服务的端口信息
 	 IDDS_Protocol recClientReq=null;
 	 IDDS_Protocol recServerRsp=null;
-
+	 IDDS_Protocol recClientBeat=null;
+	 IDDS_Protocol recFire=null;
+	 IDDS_Protocol recTCPPackage=null;
+	 IDDS_Protocol recUDPClientNat=null;//接收客户端穿墙请求
+	 IDDS_Protocol recTCPClientNat=null;//接收客户端TCP穿墙请求
 	/**
 	 * 
 	* @Name: InitServiceRec 
@@ -54,10 +63,10 @@ public  void InitServiceRec(String ip,int port,String typeName)
 		 recServerRsp=(IDDS_Protocol)ProtocolManager.getInstance().CreateObject(typeName);
 		 recServerRsp.RecData(ip+":"+port, recService);
 	} catch (InstantiationException e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	}
 	
@@ -78,7 +87,7 @@ public void InitClientRequest(String ip,int port,String typeName)
 	
 	
 	try {
-		recClientRequest=new RecviceClientRequest();
+		 recClientRequest=new RecviceClientRequest();
 		 recClientReq=(IDDS_Protocol)ProtocolManager.getInstance().CreateObject(typeName);
 		 recClientReq.RecData(ip+":"+port, recClientRequest);
 		
@@ -90,5 +99,143 @@ public void InitClientRequest(String ip,int port,String typeName)
 		e.printStackTrace();
 	}
 
+}
+/**
+ * 
+* @Name: InitHeartBeat 
+* @Description: 接收心跳
+* @param ip
+* @param port
+* @param typeName  参数说明 
+* @return void    返回类型 
+* @throws
+ */
+public void InitHeartBeat(String ip,int port,String typeName)
+{
+	try {
+		String addr=ip+":"+port;
+		ManagerAddrInfo.hashMap.put("ManagerBeat", addr);
+		recHeartBeat=new RecviceHeartbeat();
+		recClientBeat=(IDDS_Protocol)ProtocolManager.getInstance().CreateObject(typeName);
+		recClientBeat.RecData(addr, recHeartBeat);
+		System.out.println("启动心跳接收："+ip+","+port);
+		
+	} catch (InstantiationException e) {
+		
+		e.printStackTrace();
+	} catch (IllegalAccessException e) {
+		
+		e.printStackTrace();
+	}
+}
+/**
+ * 
+* @Name: InitRecUDPNat 
+* @Description: 接收客户端UDP穿墙请求
+* @param ip 
+* @param port
+* @param typeName  参数说明 
+* @return void    返回类型 
+* @throws
+ */
+public void InitRecUDPNat(String ip,int port,String typeName)
+{
+	try {
+		String addr=ip+":"+port;
+		ManagerAddrInfo.hashMap.put("ManagerUDPNAT", addr);
+		recUDPNat=new RecviceClientUDPWall();
+		recUDPClientNat=(IDDS_Protocol)ProtocolManager.getInstance().CreateObject(typeName);
+		recUDPClientNat.RecData(addr, recUDPNat);
+		System.out.println("启动UDP穿墙请求："+ip+","+port);
+	} catch (InstantiationException e) {
+		
+		e.printStackTrace();
+	} catch (IllegalAccessException e) {
+		
+		e.printStackTrace();
+	}
+}
+/**
+ * 
+* @Name: InitRecTCPNat 
+* @Description: 接收客户端UDP穿墙请求
+* @param ip 
+* @param port
+* @param typeName  参数说明 
+* @return void    返回类型 
+* @throws
+ */
+public void InitRecTCPNat(String ip,int port,String typeName)
+{
+	try {
+		String addr=ip+":"+port;
+		ManagerAddrInfo.hashMap.put("ManagerTCPNAT", addr);
+		recTCPNat=new RecviceClientTCPWall();
+		recTCPClientNat=(IDDS_Protocol)ProtocolManager.getInstance().CreateObject(typeName);
+		recTCPClientNat.RecData(addr, recTCPNat);
+		System.out.println("启动TCP穿墙请求接收："+ip+","+port);
+	} catch (InstantiationException e) {
+		
+		e.printStackTrace();
+	} catch (IllegalAccessException e) {
+		
+		e.printStackTrace();
+	}
+}
+/**
+ * 
+* @Name: InitRecWallSucess 
+* @Description: 接收UDP穿墙成功信息
+* @param ip
+* @param port
+* @param typeName  参数说明 
+* @return void    返回类型 
+* @throws
+ */
+public void InitRecWallSucess(String ip,int port,String typeName)
+{
+	try {
+		String addr=ip+":"+port;
+		ManagerAddrInfo.hashMap.put("ManagerWallSucess", addr);
+		recFireInfo=new RecviceWallSucess();
+		recFire=(IDDS_Protocol)ProtocolManager.getInstance().CreateObject(typeName);
+		recFire.RecData(addr, recFireInfo);
+		System.out.println("启动穿墙成功信息接收："+ip+","+port);
+	} catch (InstantiationException e) {
+		
+		e.printStackTrace();
+	} catch (IllegalAccessException e) {
+		
+		e.printStackTrace();
+	}
+}
+
+/**
+ * 
+* @Name: InitRecTCPNat 
+* @Description: TCP服务定时发送包给管理器，NAT保持信息
+* @param ip
+* @param port
+* @param typeName  参数说明 
+* @return void    返回类型 
+* @throws
+ */
+public void InitRecTCPBeat(String ip,int port,String typeName)
+{
+	try {
+		String addr=ip+":"+port;
+		ManagerAddrInfo.hashMap.put("ManagerTCPBeat", addr);
+		recTCPBeat=new  RecviceTCPNatPackage();
+		recTCPPackage=(IDDS_Protocol)ProtocolManager.getInstance().CreateObject(typeName);
+		recTCPPackage.RecData(addr, recTCPBeat);
+		System.out.println("启动服务端TCP心跳接收："+ip+","+port);
+		
+	} catch (InstantiationException e) {
+		
+		e.printStackTrace();
+	} catch (IllegalAccessException e) {
+		
+		e.printStackTrace();
+	}
 }
 }

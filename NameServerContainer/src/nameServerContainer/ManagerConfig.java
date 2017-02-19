@@ -49,4 +49,11 @@ public static String ManagerAddr="127.0.0.1";
  * 管理中心端口
  */
 public static int ManagerPort=3333;
+
+
+
+public static boolean isBeat=true;
+public static boolean isTCPNat=true;
+
+
 }

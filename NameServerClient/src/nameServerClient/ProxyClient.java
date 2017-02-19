@@ -6,6 +6,8 @@ import PublicModel.ServerBinds;
 import RequestServerInfo.AnalysisParam;
 import RequestServerInfo.ServerManagerType;
 import Tools.MsgPackTool;
+import UDPPeerToPeer.ServerXml;
+import UDPPeerToPeer.ServerXmlInfo;
 import nameServerInterface.IPoxyObj;
 
 
@@ -79,7 +81,23 @@ public static IPoxyObj CastObj(String name,StringBuilder error)
 	    	 MsgPackTool tool=new MsgPackTool();
 	    	 ServerBinds serverinfo= tool.Deserialize(result, ServerBinds.class, error);
 	    	 //tempPorxy=new ServerConnectPorxy(serverinfo.address,serverinfo.port,serverinfo.communicationType);
-	 		 client=ProcessClient(name,serverinfo.address,serverinfo.port,serverinfo.communicationType);
+	    	 if(serverinfo.natAddr!=null&&serverinfo.natAddr.length()>0)
+	    	 {
+	    		 //穿墙功能
+	    		 client=ProcessClient(name,serverinfo.address,serverinfo.port,serverinfo.communicationType);
+	    		 byte[] data= client.GetData(result);
+	    		 String info=new String(data);
+	    		 ServerXml server=ServerXmlInfo.Analysis(info);
+	    		 client.DisConnect();
+	    		 String[] serveraddr=server.address.split(":");
+	    		 //重新连接服务端
+	    		 ReSetProcessClient(client,serveraddr[0],Integer.valueOf(serveraddr[1]));
+	    	 }
+	    	 else
+	    	 {
+	    		 //不需要穿墙
+	    		 client=ProcessClient(name,serverinfo.address,serverinfo.port,serverinfo.communicationType);
+	    	 }
 	 		
 	 	    
 	    }
@@ -95,5 +113,9 @@ private static   ClientToServer ProcessClient(String name,String addr,int port,S
 	
 	client.ServerName=name;
 	return client;
+}
+private static   void  ReSetProcessClient(ClientToServer client,String addr,int port)
+{
+	client.Reset(addr, port);
 }
 }

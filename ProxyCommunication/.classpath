@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/Jeromq.jar" sourcepath=""/>
 	<classpathentry combineaccessrules="false" kind="src" path="/IProtocols"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ProtocolsManager"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ISearch"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

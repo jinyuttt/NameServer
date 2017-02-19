@@ -14,15 +14,20 @@ package ProxyManager;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import AppConfig.ManagerGlobalConfig;
 import JJYComponent.JJYTableCell;
 import ProcessMessage.InnerMessage;
 import SeverManager.ServerManager;
+
+
 import javax.swing.JScrollPane;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -112,15 +117,33 @@ public class JProxyManager extends JPanel {
 		//
 		manager.InitServiceRec(ManagerGlobalConfig.ManagerServerAddress, ManagerGlobalConfig.ServerPort, "TCP");
 		manager.InitClientRequest(ManagerGlobalConfig.ManagerAddress, ManagerGlobalConfig.ReqPort, "TCP");
+		manager.InitHeartBeat(ManagerGlobalConfig.ManagerHeart, ManagerGlobalConfig.beatPort, "UDP");
+		manager.InitRecWallSucess(ManagerGlobalConfig.ManagerWall, ManagerGlobalConfig.wallPort, "UDP");
+		manager.InitRecTCPBeat(ManagerGlobalConfig.ManagerTCPBeat, ManagerGlobalConfig.tcpbeat, "TCP");
+		manager.InitRecUDPNat(ManagerGlobalConfig.ManagerUDPNat, ManagerGlobalConfig.udpNatPort, "UDP");
+		manager.InitRecTCPNat(ManagerGlobalConfig.ManagerTCPNat, ManagerGlobalConfig.tcpNatPort, "TCP");
 		//
 		InnerMessage.getInstance().PostMessage(this, "AddUILog", "监视服务成功!");
 		tb_server.getColumnModel().getColumn(6).setCellRenderer(new JJYTableCell());
 		//tb_server.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(new JCheckBox()));
 	}
+	
+	/**
+	 * 
+	* @Name: AddServerInfo 
+	* @Description: 接收服务信息 
+	* @param model  参数说明 
+	* @return void    返回类型 
+	* @throws
+	 */
 	public void AddServerInfo(ServerModel model)
 	{
 		Object[]rowData=new Object[]{model.sid,model.name,model.IP,String.valueOf(model.port),model.status,model.master,model.isUsing};
 		datamodel=(DefaultTableModel) tb_server.getModel();
+		if(datamodel.getRowCount()>50)
+		{
+			datamodel.setRowCount(0);
+		}
 	for(int i=0;i<datamodel.getRowCount();i++)
 	{
 		if(datamodel.getValueAt(i, 0).equals(model.sid))
@@ -133,10 +156,23 @@ public class JProxyManager extends JPanel {
 		datamodel.addRow(rowData);
 		//tb_server.getModel().
 	}
+	
+	/**
+	 * 
+	* @Name: AddLog 
+	* @Description: 接收日志 
+	* @param log  参数说明 
+	* @return void    返回类型 
+	* @throws
+	 */
 	public void AddLog(LogInfos log)
 	{
 		String[]rowData=new String[]{new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(log.logtime),log.logcontent,log.level};
 		datamodel=(DefaultTableModel) tb_log.getModel();
+		if(datamodel.getRowCount()>50)
+		{
+			datamodel.setRowCount(0);
+		}
 		datamodel.addRow(rowData);
 	}
 

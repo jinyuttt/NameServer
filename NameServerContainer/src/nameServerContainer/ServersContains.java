@@ -10,6 +10,7 @@ import PublicModel.ServerBinds;
 
 /**
  * 服务信息存储
+ * 服务端与管理器都是用该类保存信息
  * @author jinyu
  *
  */
@@ -28,5 +29,11 @@ public static  ConcurrentHashMap<String,ServerBinds> masterServers=new Concurren
  * 主服务
  */
 public static  ConcurrentHashMap<String,ArrayList<ServerBinds>> slaveServers=new ConcurrentHashMap<String, ArrayList<ServerBinds >>();
+
+/**
+ * 失活的服务
+ */
+public static  ConcurrentHashMap<String,ArrayList<ServerBinds>> unActionServers=new ConcurrentHashMap<String, ArrayList<ServerBinds >>();
+
 
 }

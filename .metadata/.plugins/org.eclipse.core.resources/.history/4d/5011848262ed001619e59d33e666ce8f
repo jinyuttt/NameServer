@@ -1,0 +1,64 @@
+  
+/**    
+* 文件名：XmlModel.java    
+*    
+* 版本信息：    
+* 日期：2017年2月8日    
+* Copyright 足下 Corporation 2017     
+* 版权所有    
+*    
+*/  
+
+package UDPPeerToPeer;
+
+import java.io.StringReader;
+
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.xml.sax.InputSource;
+
+/**    
+*     
+* 项目名称：PeerToPeerServer    
+* 类名称：XmlModel    
+* 类描述：    
+* 创建人：jinyu    
+* 创建时间：2017年2月8日 上午1:53:21    
+* 修改人：jinyu    
+* 修改时间：2017年2月8日 上午1:53:21    
+* 修改备注：    
+* @version     
+*     
+*/
+public class ServerXmlInfo {
+public static String HeaderXml(String serverName,String address,String xmlInfo)
+{
+	StringBuilder xml=new StringBuilder();
+	xml.append("<NameServerInfo>");
+	xml.append("<Name>");
+	xml.append(serverName);
+	xml.append("</Name>");
+	xml.append("<Address>");
+	xml.append(address);
+	xml.append("</Address>");
+	xml.append("<Info>");
+	xml.append(xmlInfo);
+	xml.append("</Info>");
+	xml.append("</NameServerInfo>");
+    return xmlInfo;
+	
+}
+public static ServerXml Analysis(String xmlString)
+{
+	String xmlStr =xmlString;
+	StringReader sr = new StringReader(xmlStr); 
+	InputSource is = new InputSource(sr); 
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); 
+	DocumentBuilder builder=factory.newDocumentBuilder(); 
+	Document doc = builder.parse(is);
+	return null;
+	
+}
+}

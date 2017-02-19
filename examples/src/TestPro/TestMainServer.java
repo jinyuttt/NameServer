@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import DataProcess.DataCenter;
 import DataProcess.RecData;
+
 import nameServerFrame.ServiceRegistry;
 import nameServerInterface.IServer;
 
@@ -20,7 +21,6 @@ public class TestMainServer {
 		HashMap<String, String> hamp=new HashMap<String, String>();
 		
 		ServiceRegistry.AddServers(obj, url, hamp);
-
 
 	
 		System.in.read();

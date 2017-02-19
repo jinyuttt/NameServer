@@ -17,16 +17,21 @@ import java.util.Map;
 
  
 
+
 /**
-
- * 类名：读取配置类<br>
-
- * @author Phonnie
-
- *
-
+ * 
+*     
+* 项目名称：Com.Tools    
+* 类名称：ConfigReader    
+* 类描述：    读取写入ini类型拍照文件
+* 创建人：jinyu    
+* 创建时间：2017年2月18日 下午12:03:40    
+* 修改人：jinyu    
+* 修改时间：2017年2月18日 下午12:03:40    
+* 修改备注：    
+* @version     
+*
  */
-
 public class ConfigReader {
 
      

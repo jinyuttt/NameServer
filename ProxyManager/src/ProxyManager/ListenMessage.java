@@ -72,13 +72,22 @@ public class ListenMessage implements IInerMessage {
 			    {
 			    	 model.master="是";
 			    }
-			    if(obj.Is_Using.equals("0"))
+			    if(obj.is_Using.equals("0"))
 			    {
 			       model.isUsing=false;
 			    }
 			    else
 			    {
 			    	model.isUsing=true;
+			    }
+			    //
+			    if(obj.isAction)
+			    {
+			    	model.status="活动";
+			    }
+			    else
+			    {
+			    	model.status="异常";
 			    }
 			    model.sid=obj.sid;
 			    objui.AddServerInfo(model);

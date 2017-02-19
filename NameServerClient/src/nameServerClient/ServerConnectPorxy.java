@@ -26,6 +26,28 @@ private	BridgeClient client=new BridgeClient();
 		client.Create();
  		client.Connect();
 	}
+	/**
+	 * 
+	* 从新建立网络连接.    
+	*    
+	* @param address
+	* @param port
+	 * @return 
+	 */
+	public boolean ResetConnectPorxy(String address, int port)
+	{
+		client.IP=address;
+		client.port=port;
+	return	client.Connect();
+	}
+	
+	/**
+	 * 
+	* @Name: Close 
+	* @Description: 关闭连接
+	* @return void    返回类型 
+	* @throws
+	 */
   public void Close()
   {
 	  if(client!=null)
@@ -33,16 +55,44 @@ private	BridgeClient client=new BridgeClient();
 		  client.Close();
 	  }
   }
+  /**
+   * 
+  * @Name: GetData 
+  * @Description: 返回数据
+  * @param para 参数
+  * @return  参数说明 
+  * @return byte[]    返回数据
+  * @throws
+   */
 	public byte[] GetData(byte[] para) {
 	
 	byte[]data=	client.RecData(para);
 	return data;
 	}
 
+	/**
+	 * 
+	* @Name: SetData 
+	* @Description: 传递数据
+	* @param data  数据
+	* @return void    返回类型 
+	* @throws
+	 */
 	public void SetData(byte[] data) {
 	
 		client.SendData(data);
 		
 	}
-
+	
+	/**
+	 * 
+	* @Name: DisConnect 
+	* @Description: 端开连接
+	* @return void    返回类型 
+	* @throws
+	 */
+public void DisConnect()
+{
+	client.DisConnect();
+}
 }

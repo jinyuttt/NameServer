@@ -83,6 +83,7 @@ public ServerBinds GetCur(String name) {
 	 */
 	public void NoticeServerInfo(ServerBinds info)
 	{
+		
 		serverAdd.SendInfo(info);
 	}
 	

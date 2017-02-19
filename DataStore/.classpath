@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/jfxrt.jar"/>
 	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/management-agent.jar"/>
 	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/resources.jar"/>
-	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/rt.jar" sourcepath="D:/jinyu/BigData/lib/rt.jar"/>
+	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/rt.jar" sourcepath="/ProtocolsInstance"/>
 	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/BerkeleyDB.jar"/>
 	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/h2-1.3.176.jar"/>
 	<classpathentry kind="lib" path="D:/jinyu/BigData/lib/perst.jar"/>

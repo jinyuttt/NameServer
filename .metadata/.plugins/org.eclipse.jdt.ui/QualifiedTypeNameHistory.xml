@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="ch.qos.logback.core.pattern.parser.Node"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.ConnectionConfiguration"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.XMPPConnection"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.packet.Presence.Type"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.PacketListener"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.filter.AndFilter"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.packet.Message"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.filter.FromContainsFilter"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.PacketCollector"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.filter.PacketTypeFilter"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.Chat"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.MessageListener"/>
-<fullyQualifiedTypeName name="java.awt.TrayIcon.MessageType"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.AbstractXMPPConnection"/>
-<fullyQualifiedTypeName name="org.jivesoftware.smack.tcp.XMPPTCPConnection"/>
 <fullyQualifiedTypeName name="java.lang.CharSequence"/>
 <fullyQualifiedTypeName name="org.jivesoftware.smack.chat.ChatManager"/>
 <fullyQualifiedTypeName name="org.jivesoftware.smack.chat.Chat"/>
@@ -28,7 +12,6 @@
 <fullyQualifiedTypeName name="Tools.MsgPackTool"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="RequestServerInfo.ServerMangerType"/>
 <fullyQualifiedTypeName name="RequestServerInfo.AnalysisParam"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
@@ -44,10 +27,7 @@
 <fullyQualifiedTypeName name="PublicModel.ServerBinds"/>
 <fullyQualifiedTypeName name="ProcessMessage.ProcessMessage"/>
 <fullyQualifiedTypeName name="ProcessMessage.InnerMessage"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="nameServerContainer.ManagerConfig"/>
 <fullyQualifiedTypeName name="ProtocolsManager.ProtocolManager"/>
-<fullyQualifiedTypeName name="DDS_Transfer.IDDS_Protocol"/>
 <fullyQualifiedTypeName name="AppConfig.GlobalConfig"/>
 <fullyQualifiedTypeName name="RequestServerInfo.ServerManagerType"/>
 <fullyQualifiedTypeName name="AppConfig.ManagerGlobalConfig"/>
@@ -60,4 +40,24 @@
 <fullyQualifiedTypeName name="java.util.jar.Pack200.Packer"/>
 <fullyQualifiedTypeName name="org.msgpack.core.MessagePacker"/>
 <fullyQualifiedTypeName name="java.io.BufferedOutputStream"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="nameServerContainer.ServersContains"/>
+<fullyQualifiedTypeName name="nameServerContainer.CheckServerAction"/>
+<fullyQualifiedTypeName name="DDS_Transfer.IDDS_Protocol"/>
+<fullyQualifiedTypeName name="java.util.concurrent.LinkedBlockingQueue"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+<fullyQualifiedTypeName name="ProxyExchange.PostUDP"/>
+<fullyQualifiedTypeName name="nameServerFrame.PostHeartbeat"/>
+<fullyQualifiedTypeName name="java.net.InetAddress"/>
+<fullyQualifiedTypeName name="java.net.SocketAddress"/>
+<fullyQualifiedTypeName name="nameServerInterface.NetData"/>
+<fullyQualifiedTypeName name="nameServerContainer.ManagerConfig"/>
+<fullyQualifiedTypeName name="UDPPeerToPeer.ServerXml"/>
+<fullyQualifiedTypeName name="UDPPeerToPeer.ServerXmlInfo"/>
+<fullyQualifiedTypeName name="nameServerContainer.ServerNetXml"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Node"/>
+<fullyQualifiedTypeName name="nameServerContainer.ManagerInfo"/>
+<fullyQualifiedTypeName name="Tools.NetworkAll"/>
+<fullyQualifiedTypeName name="Tools.IpV4Util"/>
 </qualifiedTypeNameHistroy>

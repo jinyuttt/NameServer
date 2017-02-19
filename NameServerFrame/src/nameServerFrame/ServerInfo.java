@@ -17,5 +17,10 @@ public class ServerInfo {
 	 * 服务代理
 	 */
 	public ServerPorxy porxy;
+	
+	/**
+	 * 代理通讯类型
+	 */
+	public String type_Name;
 
 }

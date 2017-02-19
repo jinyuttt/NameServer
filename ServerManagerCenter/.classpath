@@ -11,5 +11,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ProxyCommunication"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PublichModel"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ProcessMessage"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PeerToPeer"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

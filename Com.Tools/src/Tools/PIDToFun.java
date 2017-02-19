@@ -11,11 +11,28 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * 机器内当前唯一值
- * @author jinyu
- *
+ * 
+*     
+* 项目名称：Com.Tools    
+* 类名称：PIDToFun    
+* 类描述：    进程内创建唯一值
+* 创建人：jinyu    
+* 创建时间：2017年2月18日 下午12:05:48    
+* 修改人：jinyu    
+* 修改时间：2017年2月18日 下午12:05:48    
+* 修改备注：    
+* @version     
+*
  */
 public class PIDToFun {
+	/**
+	 * 
+	* @Name: getPID 
+	* @Description: 获取进程ID
+	* @return  参数说明 
+	* @return String    返回类型 
+	* @throws
+	 */
 	public static final String getPID() {   
         String pid = System.getProperty("pid");   
         if (pid == null) {   

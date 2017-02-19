@@ -14,6 +14,7 @@ public interface IDDS_Protocol {
  */
 public boolean SendData(String adress,byte[]data);
 
+public  void DisConnect();
 
 
 /**
@@ -56,13 +57,17 @@ public  boolean BindLocal(String locahost,int port);
  */
 public boolean Connect(String remoteaddr,int port);
 
-/*
- * 通过服务端再次发送数据,与CreateClient搭配的使用
- * 实现时关闭Socket
+/**
+ * 
+* @Name: ClientSocketSend 
+* @Description:  通过服务端再次发送数据,与CreateClient搭配的使用,实现时关闭Socket
+* @param data  参数说明 
+* @return void    返回类型 
+* @throws
  */
 public void ClientSocketSend(byte[]data);
 
-/*
+/**
  * 通过服务端再次发送数据,与CreateClient搭配的使用
  * 该接口不能关闭Socket；只发送
  */
@@ -80,11 +85,19 @@ public void ServerSocketSend(byte[]data);
 public void ServerSocketSendData(byte[]data);
 
 /*
- * 开启客户端数据接收
+ * 开启客户端数据接收，接收完成后关闭
  */
 public byte[] RecClientSocket();
 
-
+/**
+ * 
+* @Name: RecClientSocketData 
+* @Description: 客户端持续接收数据
+* @return  参数说明 
+* @return byte[]    返回类型 
+* @throws
+ */
+public byte[] RecClientSocketData();
 
 /**
  * 获取传输地址
@@ -115,5 +128,15 @@ public void SetSocketBufferSize(int size);
 * @throws
  */
 public void SetRecBufferSize(int size);
+
+/**
+ * 
+* @Name: GetClientAddress 
+* @Description: 获取创建socket地址，如果已经绑定
+* @return  参数说明 
+* @return String    返回类型 
+* @throws
+ */
+public String GetClientAddress();
 
 }

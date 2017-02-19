@@ -1,0 +1,65 @@
+  
+/**    
+* 文件名：RecviceClientTCPWall.java    
+*    
+* 版本信息：    
+* 日期：2017年2月16日    
+* Copyright 足下 Corporation 2017     
+* 版权所有    
+*    
+*/  
+
+package SeverManager;
+
+import DDS_Transfer.IDDS_Protocol;
+import DDS_Transfer.IRecMsg;
+import UDPPeerToPeer.ServerXml;
+import UDPPeerToPeer.ServerXmlInfo;
+
+/**    
+*     
+* 项目名称：ServerManagerCenter    
+* 类名称：RecviceClientTCPWall    
+* 类描述：    
+* 创建人：jinyu    
+* 创建时间：2017年2月16日 下午11:53:29    
+* 修改人：jinyu    
+* 修改时间：2017年2月16日 下午11:53:29    
+* 修改备注：    
+* @version     
+*     
+*/
+public class RecviceClientTCPWall implements IRecMsg {
+
+	private IDDS_Protocol protocol;
+
+	/*
+	* Title: RecData
+	*Description: 接收穿墙请求
+	* @param address 来源地址
+	* @param data  来源数据
+	 
+	*/
+	@Override
+	public void RecData(String address, byte[] data) {
+		String xml=new String(data);
+		ServerXml server=ServerXmlInfo.Analysis(xml);
+		//
+		PostWallCmd.UDPwall(address, server);
+		protocol.ServerSocketSendData(data);
+
+	}
+
+	/*
+	* Title: SaveInstance
+	*Description:  
+	* @param call 
+	 
+	*/
+	@Override
+	public void SaveInstance(Object call) {
+		protocol=(IDDS_Protocol)call;
+
+	}
+
+}

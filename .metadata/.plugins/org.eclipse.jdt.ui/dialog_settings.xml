@@ -8,6 +8,7 @@
 	<item value="D:\jinyu\BigData\lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="3" key="CallHierarchyViewPart.orientation"/>
 	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
+	<item value="filter_imports;" key="filters_last_used"/>
 	<item value="500" key="CallHierarchyViewPart.ratio1"/>
 	<item value="1" key="SearchScopeActionGroup.search_scope_type"/>
 	<item value="500" key="CallHierarchyViewPart.ratio3"/>
@@ -17,7 +18,9 @@
 		<item value="false" key="renameSubpackages"/>
 		<item value="false" key="updateQualifiedNames"/>
 		<item value="*" key="patterns"/>
+		<item value="false" key="updateSimilarElements"/>
 		<item value="false" key="updateTextualMatches"/>
+		<item value="1" key="updateSimilarElementsMatchStrategy"/>
 	</section>
 	<section name="SearchInDialog">
 		<item value="true" key="SearchInProjects"/>
@@ -30,7 +33,7 @@
 		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
 		<item value="597" key="DIALOG_HEIGHT"/>
 		<item value="315" key="DIALOG_X_ORIGIN"/>
-		<item value="156" key="DIALOG_Y_ORIGIN"/>
+		<item value="131" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
@@ -57,6 +60,20 @@
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
+	<section name="NewAnnotationWizardPage">
+		<item value="false" key="add_documented"/>
+		<section name="AddTarget">
+			<item value="false" key="enabled"/>
+			<list key="selectedEnums">
+			</list>
+		</section>
+		<section name="AddRetention">
+			<item value="false" key="enabled"/>
+			<list key="selectedEnums">
+				<item value="CLASS"/>
+			</list>
+		</section>
+	</section>
 	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
 		<item value="true" key="ShowStatusLine"/>
 		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;" key="History"/>
@@ -77,12 +94,22 @@
 	</section>
 	<section name="FatJarPackageWizard">
 		<item value="D:\jinyu\BigData" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="TestMainServer (1) - examples" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="examples\bin\jar\testclient.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="TestMainClient (1) - examples" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="examples\bin\jar\TestClient.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="examples\bin\jar\TestClient.jar"/>
+			<item value="examples/bin/jar/TestServer.jar"/>
 			<item value="examples/bin/jar/testclient.jar"/>
+			<item value="examples\bin\jar\ProxyManager.jar"/>
+			<item value="examples/bin/jar/ProxyManager.jar"/>
+			<item value="examples/bin/jar/TestClient.jar"/>
+			<item value="examples\bin\jar\TestServer.jar"/>
+			<item value="examples\bin\jar\PeerToPeerClient.jar"/>
+			<item value="examples\bin\jar\PeerToPeerServer.jar"/>
+			<item value="examples/bin/jar/server.jar"/>
+			<item value="examples/bin/jar/client.jar"/>
 			<item value="D:\jinyu\form\SmartClient\bin\jar\ProxyManager.jar"/>
 			<item value="examples\bin\jar\wclient.jar"/>
 			<item value="Server.jar"/>
@@ -92,6 +119,11 @@
 			<item value="D:\jinyu\BigData.xml"/>
 			<item value=".xml"/>
 		</list>
+	</section>
+	<section name="JavaBuildConfigurationBlock">
+		<item value="false" key="expanded2"/>
+		<item value="false" key="expanded1"/>
+		<item value="true" key="expanded0"/>
 	</section>
 	<section name="BreadcrumbItemDropDown">
 	</section>
@@ -108,10 +140,51 @@
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="BuildPathsPropertyPage">
-		<item value="2" key="pageIndex"/>
+		<item value="1" key="pageIndex"/>
 	</section>
 	<section name="NewPackageWizardPage">
 		<item value="false" key="create_package_info_java"/>
+	</section>
+	<section name="JavaSearchPage">
+		<item value="3" key="HISTORY_SIZE"/>
+		<item value="false" key="CASE_SENSITIVE"/>
+		<item value="11" key="INCLUDE_MASK"/>
+		<section name="HISTORY2">
+			<item value="false" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="DocumentBuilderFactory" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY0">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=NameServerInterface/src&lt;nameServerInterface{NetData.java[NetData" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="nameServerInterface.NetData" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item value="false" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="NetData" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
 	</section>
 	<section name="completion_proposal_size">
 	</section>
@@ -135,13 +208,26 @@
 		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
-			<item value="D:\jinyu\form\SmartClient\bin\jar\Com.Tools.jar"/>
-			<item value="D:\jinyu\form\SmartClient\bin\jar\NameServerClient.jar"/>
-			<item value="D:\jinyu\form\SmartClient\bin\jar\ProxyCommunication.jar"/>
-			<item value="D:\jinyu\form\SmartClient\bin\jar\IProtocols.jar"/>
-			<item value="D:\jinyu\form\SmartClient\bin\jar\ProtocolsInstance.jar"/>
-			<item value="D:\jinyu\form\SmartClient\bin\jar\ServerManagerCenter.jar"/>
-			<item value="D:\jinyu\form\SmartClient\bin\jar\ProxyManager.jar"/>
+			<item value="examples/bin/jar/XMPPClient.jar"/>
+			<item value="examples/bin/jar/ServerManagerCenter.jar"/>
+			<item value="examples/bin/jar/PublichModel.jar"/>
+			<item value="examples/bin/jar/ProxyCommunication.jar"/>
+			<item value="examples/bin/jar/ProtocolsManager.jar"/>
+			<item value="examples/bin/jar/ProtocolsInstance.jar"/>
+			<item value="examples/bin/jar/ProcessMessage.jar"/>
+			<item value="examples/bin/jar/PeerToPeer.jar"/>
+			<item value="examples/bin/jar/NameServerInterface.jar"/>
+			<item value="examples/bin/jar/NameServerFrame.jar"/>
+			<item value="examples/bin/jar/NameServerContainer.jar"/>
+			<item value="examples/bin/jar/NameServerClient.jar"/>
+			<item value="examples/bin/jar/JLoader.jar"/>
+			<item value="examples\bin\jar\ISearch.jar"/>
+			<item value="examples/bin/jar/IProtocols.jar"/>
+			<item value="examples/bin/jar/HashLoadBalancing.jar"/>
+			<item value="examples/bin/jar/DistributedDataProcessing.jar"/>
+			<item value="examples/bin/jar/DataStore.jar"/>
+			<item value="examples/bin/jar/Com.Tools.jar"/>
+			<item value="examples\bin\jar\DistributedDataProcessing.jar"/>
 		</list>
 	</section>
 	<section name="JavaElementSearchActions">

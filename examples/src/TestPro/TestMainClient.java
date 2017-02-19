@@ -37,20 +37,20 @@ public class TestMainClient {
 		while(true)
 		{
 		StringBuilder error=new StringBuilder();
-	    IPoxyObj proxy=	ProxyClient.CastObj("初始化验证", error);
+	    IPoxyObj proxy=	ProxyClient.CastObj("Test", error);
 	    if(proxy!=null)
 	    {
-	    //	MsgPackTool tool=new MsgPackTool();
+	     	MsgPackTool tool=new MsgPackTool();
 			TreansferModel model=new TreansferModel();
 			model.key=String.valueOf(System.currentTimeMillis());
 			model.data=new Date().toString();
 		    byte[]bytes=new Date().toString().getBytes();
-		    		//tool.Serialize(model, error);
+		    bytes= tool.Serialize(model, error);
 			
 	        proxy.SetData(bytes);
 	    }
 	    try {
-			Thread.sleep(10);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

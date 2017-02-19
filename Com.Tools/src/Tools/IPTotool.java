@@ -3,7 +3,31 @@ package Tools;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * 
+*     
+* 项目名称：Com.Tools    
+* 类名称：IPTotool    
+* 类描述：    IP地址转INT
+* 创建人：jinyu    
+* 创建时间：2017年2月18日 上午11:58:45    
+* 修改人：jinyu    
+* 修改时间：2017年2月18日 上午11:58:45    
+* 修改备注：    
+* @version     
+*
+ */
 public class IPTotool {
+	
+	/**
+	 * 
+	* @Name: ipStr2int 
+	* @Description: IP转换
+	* @param ipstr IP地址
+	* @return  参数说明 
+	* @return int    返回类型 
+	* @throws
+	 */
 	public static int ipStr2int(String ipstr)
 	{
 	    byte[] bytes = null;

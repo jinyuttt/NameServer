@@ -6,11 +6,10 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+
 import java.net.SocketAddress;
-
-
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,19 +27,34 @@ public class UDPProtocols implements IDDS_Protocol{
 		IRecMsg curRec=null;
 		int socketBuffersize=32;
 		int recBuffersize=1024;
-		ServerSocket serverSocket = null;
-		Socket clientSocket=null;
-private void SendMsg(String ip,int port,byte[]data) throws IOException, Exception
+		DatagramSocket serverSocket = null;
+		DatagramSocket clientSocket=null;
+		private boolean isRun=true;
+		DatagramPacket servercall=null;
+		/**
+		 * 
+		* @Name: SendMsg 
+		* @Description: 向该IP,端口发送数据发送数据并且关闭
+		* @param ip
+		* @param port
+		* @param data
+		* @throws IOException
+		* @throws Exception  参数说明 
+		* @return void    返回类型 
+		* @throws
+		 */
+      private void SendMsg(String ip,int port,byte[]data) throws IOException, Exception
 		{
-	System.out.println("发送IP:"+ip);
-	System.out.println("发送端口:"+port);
+	      
 	        DatagramSocket client = new DatagramSocket(0);
 		    DatagramPacket dp=new DatagramPacket(data, data.length,InetAddress.getByName(ip),port);
 		     client.send(dp);
-		     
-		       curLocalAddress= client.getLocalAddress().getHostAddress()+":"+client.getLocalPort();
-		       client.close();
+		     curLocalAddress= client.getLocalAddress().getHostAddress()+":"+client.getLocalPort();
+		     client.close();
 		}
+/**
+ *  向该地址发送数据
+ */
 	@Override
 	public boolean SendData(String adress, byte[] data) {
 		String[] addr=adress.split(":");
@@ -48,9 +62,9 @@ private void SendMsg(String ip,int port,byte[]data) throws IOException, Exceptio
 		{
 			String serverIP=addr[0];
 			int port=Integer.valueOf(addr[1]);
-			// TCP发送
 			try {
 				SendMsg(serverIP,port,data);
+				return true;
 			} catch (IOException e) {
 			  System.out.println("数据通信失败,IP:"+serverIP+",端口："+port);
 				
@@ -58,15 +72,14 @@ private void SendMsg(String ip,int port,byte[]data) throws IOException, Exceptio
 				
 				e.printStackTrace();
 			}
-			
 		}
-		return true;
+		return false;
 	}
 
 	@Override
 	public void RecData(String Address, IRecMsg rec) {
 		
-		 curRec=rec;
+		   curRec=rec;
 			//避免同一实例启动
 			SoeckRec(Address);
 		
@@ -79,8 +92,7 @@ private void SoeckRec(String Address)
 {
 	Thread rec1=new Thread(new Runnable()
 	{
-@SuppressWarnings("resource")
-public void run() {
+	public void run() {
 	String[] addr=Address.split(":");
 	curBindAddress=Address;
 	if(addr.length==2)
@@ -94,6 +106,7 @@ public void run() {
 				listen = new DatagramSocket();
 				listen.setReuseAddress(true);
 			    listen.bind(new InetSocketAddress(port));
+			    
 				  System.out.println("绑定端口:"+port);
 			} 
 			   catch (IOException e) 
@@ -120,12 +133,15 @@ public void run() {
 				e.printStackTrace();
 			}
 	    }
-		while(true)
+		while(isRun)
 		{
 			try {
-				byte [] buf = new byte[1024]; 
-	            DatagramPacket dp = new DatagramPacket(buf,1024); 
+				serverSocket=listen;
+				byte [] buf = new byte[recBuffersize]; 
+				byte[] recall=new byte[0];
+	            DatagramPacket dp = new DatagramPacket(buf,buf.length); 
 	            listen.receive(dp);
+	            servercall=new  DatagramPacket(recall, recall.length,dp.getSocketAddress());
 			    String ip = dp.getAddress().getHostAddress();
 		        int remoteport=dp.getPort();
 				int r= dp.getLength();
@@ -159,6 +175,7 @@ private void CallData(String src,int port,byte[]data)
 	if(curRec!=null)
 	{
 		String addr=src+":"+port;
+		curRec.SaveInstance(this);
 		curRec.RecData(addr, data);
 	}
 
@@ -191,9 +208,62 @@ private void CallData(String src,int port,byte[]data)
 	public void Close() {
 		if(serverSocket!=null)
 		{
-		     try {
-		    	// isRun=false;
-				 serverSocket.close();
+		    isRun=false;
+		    serverSocket.close();
+			
+		}
+		
+	}
+	  
+
+	  
+
+	/**
+	 * 关闭socket
+	 */
+	@Override
+	public void ClientSocketClose() {
+	if(clientSocket!=null)
+	{
+		clientSocket.close();
+	}
+		
+	}
+	  
+	/**
+	 * 创建Socket，绑定该地址
+	 */
+	@Override
+	public void CreateClient(String ip, int port) {
+		try {
+			InetAddress point = null;
+			try {
+				point = InetAddress.getByName(ip);
+			} catch (UnknownHostException e) {
+				
+				e.printStackTrace();
+			} 
+			//SocketAddress endpoint=new SocketAddress ();
+			clientSocket=new DatagramSocket(port,point);
+		} catch (SocketException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	  
+	
+	/**
+	 * 发送数据并且关闭
+	 */
+	@Override
+	public void ClientSocketSend(byte[] data) {
+		if(clientSocket!=null)
+		{
+			DatagramPacket p=new DatagramPacket(data, data.length);
+			try {
+				clientSocket.send(p);
+				clientSocket.close();
 			} catch (IOException e) {
 				
 				e.printStackTrace();
@@ -202,141 +272,221 @@ private void CallData(String src,int port,byte[]data)
 		
 	}
 	  
-
-	  
-	/**  
-	* (non-Javadoc)    
-	* @see DDS_Transfer.IDDS_Protocol#ClientSocketClose()    
-	*/  
-	
-	@Override
-	public void ClientSocketClose() {
-		// TODO Auto-generated method stub
-		
-	}
-	  
-	/**  
-	* (non-Javadoc)    
-	* @see DDS_Transfer.IDDS_Protocol#CreateClient(java.lang.String, int)    
-	*/  
-	
-	@Override
-	public void CreateClient(String ip, int port) {
-		// TODO Auto-generated method stub
-		
-	}
-	  
-	/**  
-	* (non-Javadoc)    
-	* @see DDS_Transfer.IDDS_Protocol#ClientSocketSend(byte[])    
-	*/  
-	
-	@Override
-	public void ClientSocketSend(byte[] data) {
-		// TODO Auto-generated method stub
-		
-	}
-	  
-	/**  
-	* (non-Javadoc)    
-	* @see DDS_Transfer.IDDS_Protocol#ServerSocketSend(byte[])    
-	*/  
-	
+	/**
+	 * 服务端反向发送数据，发送给客户端
+	 */
 	@Override
 	public void ServerSocketSend(byte[] data) {
-		// TODO Auto-generated method stub
+	if(serverSocket!=null)
+	{
+		if(servercall!=null)
+		{
+		try {
+			DatagramPacket dp=new DatagramPacket(data,data.length,servercall.getSocketAddress());
+			serverSocket.send(dp);
+		
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		}
+	}
 		
 	}
-	  
-	/**  
-	* (non-Javadoc)    
-	* @see DDS_Transfer.IDDS_Protocol#RecClientSocket()    
-	*/  
-	
+	/**
+	 * 反向客户端接收数据
+	 * 接收到数据后关闭
+	 */
 	@Override
 	public byte[] RecClientSocket() {
-		// TODO Auto-generated method stub
+		if(clientSocket!=null)
+		{
+			byte [] buf = new byte[recBuffersize]; 
+            DatagramPacket dp = new DatagramPacket(buf,recBuffersize); 
+		
+			try {
+				
+				 clientSocket.receive(dp);
+				 int r= dp.getLength();
+			     byte[]realData=new byte[r];
+			     System.arraycopy(dp.getData(), 0, realData, 0, r);
+			     clientSocket.close();
+			     return realData;
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
 		return null;
+		
 	}
-	/*
-	* Title: CreateClient
-	*Description:  
-	 
-	*/
+	
+	/**
+	 * 创建客户端
+	 */
 	@Override
 	public void CreateClient() {
-		// TODO Auto-generated method stub
+		try {
+			
+			//SocketAddress endpoint=new SocketAddress ();
+			clientSocket=new DatagramSocket();
+		} catch (SocketException e) {
+			
+			e.printStackTrace();
+		}
+		
 		
 	}
-	/*
-	* Title: BindLocal
-	*Description: 
-	* @param locahost
-	* @param port
-	* @return 
-	 
-	*/
+	/**
+	 * 客户端绑定该地址
+	 */
 	@Override
 	public boolean BindLocal(String locahost, int port) {
-		// TODO Auto-generated method stub
+		if(clientSocket!=null)
+		{
+			
+			SocketAddress addr=new InetSocketAddress(locahost,port);
+			try {
+				clientSocket.bind(addr);
+				return true;
+			} catch (SocketException e) {
+				
+				e.printStackTrace();
+			}
+		}
 		return false;
 	}
-	/*
-	* Title: Connect
-	*Description: 
-	* @param remoteaddr
-	* @param port
-	* @return 
-	 
-	*/
+	/**
+	 * 链接该地址
+	 */
 	@Override
 	public boolean Connect(String remoteaddr, int port) {
-		// TODO Auto-generated method stub
+		if(clientSocket!=null)
+		{
+			SocketAddress addr=new InetSocketAddress(remoteaddr,port);
+			try {
+				clientSocket.connect(addr);
+				return true;
+			} catch (SocketException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
 		return false;
 	}
-	/*
-	* Title: ClientSocketSendData
-	*Description: 
-	* @param data 
-	 
-	*/
+	
+	/**
+	 * 客户端发送数据并且不关闭
+	 */
 	@Override
 	public void ClientSocketSendData(byte[] data) {
-		// TODO Auto-generated method stub
 		
+		if(clientSocket!=null)
+		{
+			DatagramPacket p=new DatagramPacket(data, data.length);
+			try {
+				clientSocket.send(p);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
 	}
-	/*
-	* Title: ServerSocketSendData
-	*Description: 
-	* @param data 
-	 
-	*/
+	/**
+	 * 服务端发数据并且不关闭客户端
+	 */
 	@Override
 	public void ServerSocketSendData(byte[] data) {
-		// TODO Auto-generated method stub
+		if(serverSocket!=null)
+		{
+			DatagramPacket p=new DatagramPacket(data, data.length,servercall.getSocketAddress());;
+			try {
+				serverSocket.send(p);
+				
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
 		
 	}
-	/*
-	* Title: SetSocketBufferSize
-	*Description: 
-	* @param size 
-	 
-	*/
+	
+	/**
+	 * 设置socket缓存大小
+	 */
 	@Override
 	public void SetSocketBufferSize(int size) {
 		 socketBuffersize=size;
 		
 		
 	}
-	/*
-	* Title: SetRecBufferSize
-	*Description: 
-	* @param siez 
-	 
-	*/
+	/**
+	 * 设置接收缓存
+	 */
 	@Override
 	public void SetRecBufferSize(int size) {
 		 recBuffersize=size;
+		
+	}
+	/**
+	 * 接收客户端数据,接收后不关闭
+	 */
+	@Override
+	public byte[] RecClientSocketData() {
+		
+		if(clientSocket!=null)
+		{
+			byte [] buf = new byte[recBuffersize]; 
+            DatagramPacket dp = new DatagramPacket(buf,recBuffersize); 
+		
+			try {
+				
+				 clientSocket.receive(dp);
+				 int r= dp.getLength();
+			     byte[]realData=new byte[r];
+			     System.arraycopy(dp.getData(), 0, realData, 0, r);
+			  
+			     return realData;
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	/*
+	* Title: GetClientAddress
+	*Description: 
+	* @return 
+	 
+	*/
+	@Override
+	public String GetClientAddress() {
+		if(clientSocket!=null)
+		{
+			String addr=clientSocket.getLocalAddress().getHostAddress()+":"+clientSocket.getLocalPort();
+			return addr;
+		}
+		else
+		{
+			if(servercall!=null)
+			{
+				String addr=servercall.getAddress()+":"+servercall.getPort();
+				return addr;
+			}
+		}
+		return null;
+	}
+	/*
+	* Title: DisConnect
+	*Description:  
+	 
+	*/
+	@Override
+	public void DisConnect() {
+		// TODO Auto-generated method stub
 		
 	}
 

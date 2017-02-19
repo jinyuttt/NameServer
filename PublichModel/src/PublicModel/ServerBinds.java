@@ -46,10 +46,26 @@ public String master="0";
  * 1启用0否
  * 只针对主从服务时的主服务
  */
-public String Is_Using="1";
+public String is_Using="1";
 
 /**
- * 主从服务
+ * 
  */
 public String slave="0";
+
+/**
+ * 服务激活
+ */
+public boolean isAction=true;
+
+/*
+ * 
+ * 最新接受心跳时间
+ */
+public long  actionTime=System.currentTimeMillis();
+
+/*
+ * 穿墙接受的地址
+ */
+public String natAddr="";
 }

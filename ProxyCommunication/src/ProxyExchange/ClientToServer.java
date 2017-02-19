@@ -11,7 +11,6 @@ import ProtocolsManager.ProtocolManager;
 /**
  * 接收客户端调用
  * 
- * 暂时采用jeromq
  * @author jinyu
  *
  */
@@ -24,6 +23,15 @@ public class  ClientToServer {
 	 public String type_Name;
 	 IDDS_Protocol curObj=null;
 	 DataRecvice rec=new DataRecvice();
+	 /**
+	  * 
+	 * @Name: InitServer 
+	 * @Description: 启动服务通讯
+	 * @param call 服务回传
+	 * @param error  参数说明 
+	 * @return void    返回类型 
+	 * @throws
+	  */
 	  public void InitServer(IDataCall call, StringBuilder error) {
 		 // thecall=call;
 		  rec.calldata=call;
@@ -67,40 +75,53 @@ public class  ClientToServer {
 //rec1.setName("recNetData");
 //rec1.start();
 	}
-//	private void InitWork() {
-//		Thread rec1=new Thread(new Runnable()
-//		
-//		{
-//			@Override
-//			public void run() {
-//				
-//				 Socket responder = context.socket(ZMQ.REP);
-//		          responder.connect("inproc://rec");
-//		          while(true)
-//		          {
-//		        	byte[]data=  responder.recv();
-//		        	responder.send("end");
-//		        	try
-//		        	{
-//		        	CallData("",0,data);
-//		        	}
-//		        	catch(Exception ex)
-//		        	{
-//		        		ex.printStackTrace();
-//		        	}
-//		          }
-//			}
-//
-//			private void CallData(String string, int i, byte[] data) {
-//			  
-//				thecall.RecData(data);
-//				
-//			}
-//		}
-//);
-//rec1.setDaemon(true);
-//rec1.setName("recWorkData");
-//rec1.start();	
-//		
-//	}
+      
+	  /**
+	   * 
+	  * @Name: ProxySendNatPackage 
+	  * @Description: 服务绑定地址发送NAT包
+	  * @param addr  管理器地址
+	  * @param port  管理器地址端口 
+	  * @return void    返回类型 
+	  * @throws
+	   */
+	  public void ProxySendNatPackage(String addr,int port)
+	  {
+		  byte[]data="NatBeat".getBytes();
+		  if(curObj!=null)
+		  {
+			  try
+			  {
+			  curObj.Connect(addr, port);
+			  }
+			  catch(Exception ex)
+			  {
+				  System.out.println(ex.getMessage());
+				  
+			  }
+			  try
+			  {
+				 
+				  curObj.ClientSocketSendData(data);
+			  }
+			  catch(Exception ex)
+			  {
+				  System.out.println(ex.getMessage());
+			  }
+			  try
+			  {
+				 
+				  curObj.ServerSocketSendData(data);
+			  }
+			  catch(NullPointerException e)
+			  {
+				  
+			  }
+			  catch(Exception ex)
+			  {
+				  System.out.println(ex.getMessage());
+			  }
+		  }
+	  }
+	  
 }

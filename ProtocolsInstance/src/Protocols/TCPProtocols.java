@@ -461,27 +461,65 @@ public void ServerSocketSendData(byte[] data) {
 	}
 	
 }
-/*
-* Title: SetSocketBufferSize
-*Description: 
-* @param size 
- 
-*/
+
+/**
+ * 设置socket缓存大小
+ */
 @Override
 public void SetSocketBufferSize(int size) {
 	
 	socketBuffersize=size;
 }
-/*
-* Title: SetRecBufferSize
-*Description: 
-* @param siez 
- 
-*/
+/**
+ * 设置接收缓存区大小
+ */
 @Override
 public void SetRecBufferSize(int size) {
 	recBuffersize=size;
 	
+}
+
+/**
+ * 客户端接收数据，不关闭
+ */
+@Override
+public byte[] RecClientSocketData() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+/**
+ * 获取客户端地址
+ */
+@Override
+public String GetClientAddress() {
+	if(clientSocket!=null)
+	{
+		String addr=clientSocket.getLocalAddress().getHostAddress()+":"+clientSocket.getLocalPort();
+		return addr;
+	}
+	return null;
+}
+/*
+* Title: DisConnect
+*Description:  
+ 
+*/
+@Override
+public void DisConnect() {
+	
+	if(clientSocket!=null)
+	{
+		if(clientSocket.isOutputShutdown())
+		{
+			try {
+				clientSocket.shutdownOutput();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+	}
 }
 
 

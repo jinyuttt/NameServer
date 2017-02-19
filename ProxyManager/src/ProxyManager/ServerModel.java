@@ -48,7 +48,7 @@ public int port;
  * 服务状态：是否正常运行
  * 需要启用心跳
  */
-public String status;
+public String status="活动";
 /**
  * 是否是主从服务
  */
@@ -60,4 +60,6 @@ public String  master;
  * 负载均衡则全部是启用
  */
 public Boolean  isUsing;
+
+
 }

@@ -6,15 +6,13 @@ import org.jivesoftware.smack.chat.ChatManager;
 import org.jivesoftware.smack.chat.ChatMessageListener;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
-import org.jivesoftware.smackx.workgroup.WorkgroupInvitation;
-
 
 public class Client {
 public void Connetct()
 {
 	AbstractXMPPConnection connection = new XMPPTCPConnection("mtucker", "password", "jabber.org");  
 	try {
-			connection.connect();
+		connection.connect();
 		CharSequence user=new StringBuilder();
 		connection.login(user, "");
 		ChatManager chatmanager = ChatManager.getInstanceFor(connection);
@@ -39,7 +37,7 @@ public void Connetct()
 		Message msg=new Message("mmm","sss");
 		newChat.sendMessage(msg);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 }

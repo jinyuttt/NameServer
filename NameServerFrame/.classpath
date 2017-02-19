@@ -8,5 +8,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ProxyCommunication"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PublichModel"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PeerToPeer"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ISearch"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

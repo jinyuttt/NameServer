@@ -20,6 +20,7 @@ public class RecData implements IServer{
 	@Override
 	public void SetData(byte[] data) {
 		
+		System.out.println("接收到客户端功能数据");
 	//	StringBuilder error=null;
 //		MsgPackTool tool=new MsgPackTool();
 //		TreansferModel model=tool.Deserialize(data, TreansferModel.class, error);

@@ -1,8 +1,10 @@
 package ProxyExchange;
 
 import org.zeromq.ZMQ;
+
 import DDS_Transfer.IDDS_Protocol;
 import ProtocolsManager.ProtocolManager;
+
 
 
 /**
@@ -101,6 +103,13 @@ public void SendData(byte[]data)
 	if(curObj!=null)
 	{
 		 curObj.SendData(IP+":"+port, data);
+	}
+}
+public void DisConnect()
+{
+	if(curObj!=null)
+	{
+		 curObj.DisConnect();
 	}
 }
 }

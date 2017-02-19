@@ -64,12 +64,25 @@ class ClientToServer implements IPoxyObj{
 
 	/** 
 	* @Name: Close 
-	* @Description: TODO(这里用一句话描述这个方法的作用)   参数说明 
+	* @Description: 关闭网络 
 	* @return void    返回类型 
 	* @throws 
 	*/
 	public void Close() {
 		proxy.Close();
 		
+	}
+	
+	public void  DisConnect()
+	{
+		proxy.DisConnect();
+	}
+	
+	public void Reset(String address,int port )
+	{
+		if(proxy!=null)
+		{
+			proxy.ResetConnectPorxy(address, port);
+		}
 	}
 }

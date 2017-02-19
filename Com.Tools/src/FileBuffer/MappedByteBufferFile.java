@@ -13,7 +13,7 @@ import java.nio.channels.FileChannel;
 
 /** 
 * 
-* @Description: TODO(这里用一句话描述这个类的作用) 
+* @Description: 通过映射方式对文件进行读写 
 * @author jinyu
 * @date 2016年10月31日 上午12:26:33 
 *  
@@ -25,13 +25,27 @@ public class MappedByteBufferFile {
 	boolean preWrite=true;
 	RandomAccessFile memoryMappedFile = null;
 	byte[]dstread=null;
+
+	/**
+	 * 
+	* 创建一个新的实例 MappedByteBufferFile.    
+	*    
+	* @param fileName 文件名称（包括路径）
+	* @param size 文件长度
+	 */
 public MappedByteBufferFile(String fileName,int size)
 {
 	curfile=fileName;
 	bufferSize=size;
 	
 }
-//创建文件
+/**
+ * 
+* @Name: CreateFile 
+* @Description: 创建文件
+* @return void    返回类型 
+* @throws
+ */
 private void CreateFile()
 {
 	RandomAccessFile raf = null;
@@ -52,7 +66,14 @@ private void CreateFile()
 	}
 	
 }
-//写入文件
+/**
+ * 
+* @Name: Write 
+* @Description: 写入文件
+* @param data  参数说明 
+* @return void    返回类型 
+* @throws
+ */
 public void Write(byte[]data)
 { 
 	if(preWrite)
@@ -83,7 +104,14 @@ try {
 index+=data.length;
 
 }
-//读取文件
+/**
+ * 
+* @Name: Read 
+* @Description: 读取文件
+* @return  参数说明 
+* @return byte[]    返回类型 
+* @throws
+ */
 public byte[] Read()
 {
 	MappedByteBuffer out;
@@ -122,6 +150,13 @@ public byte[] Read()
   
 	
 }
+/**
+ * 
+* @Name: Close 
+* @Description: 关闭文件读写
+* @return void    返回类型 
+* @throws
+ */
 public void Close()
 {
 	try {
@@ -134,6 +169,13 @@ public void Close()
 		e.printStackTrace();
 	}
 }
+/**
+ * 
+* @Name: WriteClose 
+* @Description: 关闭文件写入
+* @return void    返回类型 
+* @throws
+ */
 public void WriteClose()
 {
 	try {

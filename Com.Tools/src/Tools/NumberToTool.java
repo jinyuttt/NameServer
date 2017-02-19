@@ -1,5 +1,19 @@
 package Tools;
 
+/**
+ * 
+*     
+* 项目名称：Com.Tools    
+* 类名称：NumberToTool    
+* 类描述：    byte[]与int转换
+* 创建人：jinyu    
+* 创建时间：2017年2月18日 下午12:05:02    
+* 修改人：jinyu    
+* 修改时间：2017年2月18日 下午12:05:02    
+* 修改备注：    
+* @version     
+*
+ */
 public class NumberToTool {
 	 public static byte[] longToByte(long number) { 
 	        long temp = number; 

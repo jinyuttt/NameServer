@@ -17,6 +17,20 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+/**
+ * 
+*     
+* 项目名称：Com.Tools    
+* 类名称：dom4jAnalyze    
+* 类描述：    dom4j操作xml
+* 创建人：jinyu    
+* 创建时间：2017年2月18日 下午12:04:13    
+* 修改人：jinyu    
+* 修改时间：2017年2月18日 下午12:04:13    
+* 修改备注：    
+* @version     
+*
+ */
 public class dom4jAnalyze {
 public	String UBSSDIC_PATH;
 	public void createApplicationConfigXML(){

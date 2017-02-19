@@ -5,13 +5,16 @@ import java.util.UUID;
 
 import PublicModel.ServerBinds;
 import RequestServerInfo.ReqServerInfo;
+import nameServerContainer.ManagerConfig;
+import nameServerContainer.ManagerInfo;
 import nameServerContainer.ProxyPlugin;
 import nameServerContainer.ServerInfoSave;
 import nameServerInterface.IServer;
 
 public class ServiceRegistry {
-	  static ProxyPlugin plugin = null;
-     static ReqServerInfo reqInfo=null;
+	private  static ProxyPlugin plugin = null;
+	private  static ReqServerInfo reqInfo=null;
+	private  static volatile boolean isStart=false;
 	public ServiceRegistry() {
 		
 	}
@@ -26,15 +29,7 @@ public class ServiceRegistry {
 	public static void AddServers(IServer server, String connect,HashMap<String,String> hamp) {
 		//
 		
-		if(reqInfo==null)
-		{
-			reqInfo=new ReqServerInfo();
-			reqInfo.RecReqInfo();
-	    }
-		if(plugin==null)
-		{
-		 plugin=ProxyPlugin.GetInstance();
-		}
+		
 		// 启动服务接受客户端调用
 		Sever_BindsInfo binds = AnalysisConnection.Aysy(connect);
 		ServerPorxy proxy = new ServerPorxy(binds.address, binds.port,binds.t_type);
@@ -45,6 +40,7 @@ public class ServiceRegistry {
 		ServerInfo server_Info = new ServerInfo();
 		server_Info.porxy = proxy;
 		server_Info.server = server;
+		server_Info.type_Name=binds.t_type;
         
 		//向客户端注册信息
 		ServerBinds  info=new ServerBinds();
@@ -54,7 +50,8 @@ public class ServiceRegistry {
 		info.sid= UUID.randomUUID().toString();
 		info.communicationType=binds.t_type;
 		
- 	    plugin.NoticeServerInfo(info);
+		//
+		ProxyPlugin.GetInstance().NoticeServerInfo(info);
 	     //将服务端信息保存起来，用于客户端请求
 	    ServerInfoSave saveFrame=new ServerInfoSave();
 	    saveFrame.Add(info);
@@ -65,9 +62,47 @@ public class ServiceRegistry {
 	    {
 	    	server.Start(info.name, hamp);
 	    }
+	    if(!isStart)
+	    {
+	    	isStart=true;
+	    	InitStart();
+	    	
+	    	
+	    }
 	}
+	/**
+	 * 
+	* @Name: AddServeBox 
+	* @Description: 添加服务到服务盒子 
+	* @param boxName 服务盒子名称
+	* @param serverName 服务名称
+	* @param server 服务
+	* @param hamp  服务参数
+	* @return void    返回类型 
+	* @throws
+	 */
 	public static void AddServeBox(String boxName,String serverName, IServer server,HashMap<String,String> hamp) {
 		//
+		
+		//添加进去，所有的服务盒子在启动时都应该添加好
+		ServerBoxSet.AddServer(boxName, serverName, server, hamp);
+		if(!isStart)
+	    {
+			isStart=true;
+			InitStart();
+		
+	    }
+		
+	}
+	/**
+	 * 
+	* @Name: InitStart 
+	* @Description: 服务启动时初始化
+	* @return void    返回类型 
+	* @throws
+	 */
+	private static void InitStart()
+	{
 		if(reqInfo==null)
 		{
 			reqInfo=new ReqServerInfo();
@@ -78,11 +113,30 @@ public class ServiceRegistry {
 		 plugin=ProxyPlugin.GetInstance();
 		// plugin.InitRecSeverInfo();
 		}
-		//添加进去，所有的服务盒子在启动时都应该添加好
-		ServerBoxSet.AddServer(boxName, serverName, server, hamp);
-	
+		//
+		
+			 //发送心跳
+			if(ManagerConfig.isBeat)
+			{
+			if(!ManagerInfo.hashConfig.isEmpty())
+			{
+			PostHeartbeat post=new PostHeartbeat();
+			String wall=ManagerInfo.hashConfig.getOrDefault("ManagerWallSucess", "");
+			String beat=ManagerInfo.hashConfig.getOrDefault("ManagerBeat", "");
+			post.Start(wall,beat);
+				
+			}
+			if(ManagerConfig.isTCPNat)
+			{
+				String addr=ManagerInfo.hashConfig.getOrDefault("ManagerTCPBeat", "");
+				TCPNatBeat  tcpNat=new TCPNatBeat();
+				String[] addrport=addr.split(":");
+				tcpNat.Start(addrport[0],Integer.valueOf(addrport[1]));
+			}
+			}
+	    
+		
 	}
-	
 	
 
 }
