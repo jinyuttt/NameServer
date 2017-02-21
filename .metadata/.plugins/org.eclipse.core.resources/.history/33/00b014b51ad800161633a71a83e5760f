@@ -1,0 +1,14 @@
+package SeverManager;
+
+import DDS_Transfer.IRecMsg;
+
+//нчадйЩ╬щ
+public class RecviceService implements IRecMsg {
+   
+	@Override
+	public void RecData(String address, byte[] data) {
+		
+           
+	}
+
+}

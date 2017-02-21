@@ -1,0 +1,97 @@
+package nameServerClient;
+
+import ProxyExchange.BridgeClient;
+
+/**
+ * @author jinyu
+ * 用于连接服务端
+ * 中间代理类
+ */
+public class ServerConnectPorxy {
+
+private	BridgeClient client=new BridgeClient();
+	/**
+	 * 
+	* 创建一个新的实例 ServerConnectPorxy.    
+	* 创建实例并且连接服务
+	* @param address
+	* @param port
+	* @param type_name
+	 */
+	public ServerConnectPorxy(String address, int port,String type_name) {
+		
+		client.IP=address;
+		client.port=port;
+		client.type_name=type_name;
+		client.Create();
+ 		client.Connect();
+	}
+	/**
+	 * 
+	* 从新建立网络连接.    
+	*    
+	* @param address
+	* @param port
+	 */
+	public ResetConnectPorxy(String address, int port)
+	{
+		client.IP=address;
+		client.port=port;
+		client.Connect();
+	}
+	
+	/**
+	 * 
+	* @Name: Close 
+	* @Description: 关闭连接
+	* @return void    返回类型 
+	* @throws
+	 */
+  public void Close()
+  {
+	  if(client!=null)
+	  {
+		  client.Close();
+	  }
+  }
+  /**
+   * 
+  * @Name: GetData 
+  * @Description: 返回数据
+  * @param para 参数
+  * @return  参数说明 
+  * @return byte[]    返回数据
+  * @throws
+   */
+	public byte[] GetData(byte[] para) {
+	
+	byte[]data=	client.RecData(para);
+	return data;
+	}
+
+	/**
+	 * 
+	* @Name: SetData 
+	* @Description: 传递数据
+	* @param data  数据
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void SetData(byte[] data) {
+	
+		client.SendData(data);
+		
+	}
+	
+	/**
+	 * 
+	* @Name: DisConnect 
+	* @Description: 端开连接
+	* @return void    返回类型 
+	* @throws
+	 */
+public void DisConnect()
+{
+	client.DisConnect();
+}
+}

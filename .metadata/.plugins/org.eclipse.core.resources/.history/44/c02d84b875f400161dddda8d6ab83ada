@@ -1,0 +1,53 @@
+package SeverManager;
+
+import java.util.Map.Entry;
+
+import DDS_Transfer.IDDS_Protocol;
+import DDS_Transfer.IRecMsg;
+import ProxyExchange.IDataCallBack;
+import ServerRecInfo.RecServerInfo;
+
+
+public class RecviceService implements IRecMsg {
+	IDataCallBack  sinfo=new RecServerInfo();
+	String managerInfo="";
+	private IDDS_Protocol protocol;
+	@Override
+	public void RecData(String address, byte[] data) {
+		//ProxyPlugin的InitRecSeverInfo方法一致
+		sinfo.DataRec(address, data);
+		if(managerInfo.length()==0)
+		{
+			managerInfo= ManagerInfo();
+		}
+		
+	}
+
+	  
+	/**  
+	* (non-Javadoc)    
+	* @see DDS_Transfer.IRecMsg#SaveInstance(java.lang.Object)    
+	*/  
+	
+	@Override
+	public void SaveInstance(Object call) {
+		  protocol=(IDDS_Protocol)call;
+		
+	}
+	
+	private String ManagerInfo()
+	{
+		StringBuilder xml=new StringBuilder();
+		xml.append("<ManagerInfo>");
+		for(Entry<String, String> map:ManagerAddrInfo.hashMap.entrySet())
+		{
+			xml.append("<"+map.getKey()+">");
+			xml.append(map.getValue());
+			xml.append("</"+map.getKey()+">");
+		}
+		xml.append("</ManagerInfo>");
+		return xml.toString();
+		
+	}
+
+}

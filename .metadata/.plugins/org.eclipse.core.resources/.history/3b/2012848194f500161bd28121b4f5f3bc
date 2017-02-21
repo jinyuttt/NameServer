@@ -1,0 +1,71 @@
+  
+/**    
+* 文件名：NetworkAll.java    
+*    
+* 版本信息：    
+* 日期：2017年2月18日    
+* Copyright 足下 Corporation 2017     
+* 版权所有    
+*    
+*/  
+
+package Tools;
+
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+/**    
+*     
+* 项目名称：Com.Tools    
+* 类名称：NetworkAll    
+* 类描述：    获取所有IP
+* 创建人：jinyu    
+* 创建时间：2017年2月18日 下午12:22:31    
+* 修改人：jinyu    
+* 修改时间：2017年2月18日 下午12:22:31    
+* 修改备注：    
+* @version     
+*     
+*/
+public class NetworkAll {
+static ArrayList<String> listAll=new ArrayList<String>();
+public static ArrayList<String> GetLocalAllIP()
+{
+	if(listAll.size()==0)
+	{
+	ArrayList<String> list=new ArrayList<String>();
+	Enumeration<?> allNetInterfaces = null;
+	try {
+		allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+	} catch (SocketException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	InetAddress ip = null;
+	while (allNetInterfaces.hasMoreElements())
+	{
+	NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+	System.out.println(netInterface.getName());
+	Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
+	while (addresses.hasMoreElements())
+	{
+	ip = (InetAddress) addresses.nextElement();
+	if (ip != null && ip instanceof Inet4Address)
+	{
+		String ipaddr=ip.getHostAddress();
+		list.add(ipaddr);
+	   //System.out.println("本机的IP = " + ip.getHostAddress());
+	} 
+	}
+	//
+
+	}
+	listAll=list;
+}
+	return listAll;
+ }
+}

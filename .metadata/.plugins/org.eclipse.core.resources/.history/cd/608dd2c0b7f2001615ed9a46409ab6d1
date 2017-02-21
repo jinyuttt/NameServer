@@ -1,0 +1,63 @@
+  
+/**    
+* 文件名：TCPNatBeat.java    
+*    
+* 版本信息：    
+* 日期：2017年2月14日    
+* Copyright 足下 Corporation 2017     
+* 版权所有    
+*    
+*/  
+
+package nameServerFrame;
+
+import java.util.Map.Entry;
+
+/**    
+*     
+* 项目名称：NameServerFrame    
+* 类名称：TCPNatBeat    
+* 类描述：    
+* 创建人：jinyu    
+* 创建时间：2017年2月14日 下午8:55:43    
+* 修改人：jinyu    
+* 修改时间：2017年2月14日 下午8:55:43    
+* 修改备注：    
+* @version     
+*     
+*/
+public class TCPNatBeat {
+public void Start()
+{
+	Thread send=Thread(new Runnable()
+			{
+
+				@Override
+				public void run() {
+				for(Entry<String, ServerInfo> entry:ServerInstances.servers.entrySet())
+				{
+					if(entry.getValue().porxy.type_Name.equals("TCP"))
+					{
+						entry.getValue().porxy.
+					}
+				}
+					ServerInstances.servers.put(info.name, server_Info);
+					
+				}
+		
+			});
+}
+
+/** 
+* @Name: Thread 
+* @Description: TODO(这里用一句话描述这个方法的作用) 
+* @param runnable
+* @return  参数说明 
+* @return Thread    返回类型 
+* @throws 
+*/
+private Thread Thread(Runnable runnable) {
+	// TODO Auto-generated method stub
+	return null;
+}
+}
